@@ -4,7 +4,7 @@ const Todo = ({todo}) => {
 
 
   return (
-    <tr  data-id={todo.id} >
+    <>
       <td className="list_item">
         this is where the todo info goes, but I need to convert it from handlebars...
         {/* {{#if completed}}
@@ -18,7 +18,7 @@ const Todo = ({todo}) => {
       <td className="delete">
         <img src="images/trash.png" alt="Delete"/>
       </td>
-    </tr>
+    </>
   )
 }
 

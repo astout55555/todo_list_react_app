@@ -9,7 +9,9 @@ const TodoList = ({allTodos}) => {
   const fullList = () => {
     return sortByCompletion(allTodos).map(todo => {
       return (
-        <Todo todo={todo} />
+        <tr key={todo.id} data-id={todo.id} >
+          <Todo todo={todo} />
+        </tr>
       );
     });
   }

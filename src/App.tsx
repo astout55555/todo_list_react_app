@@ -1,12 +1,23 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import TodoList from './components/TodoList';
+import todosService from './services/todos';
 
 function App() {
   const [allTodos, setAllTodos] = useState([]);
 
+  const fetchTodos = async () => {
+    try {
+      const todos = await todosService.getAllTodos();
+      setAllTodos(todos);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-
+  useEffect(() => {
+    fetchTodos();
+  }, []);
 
   return (
       <div id="items" >
