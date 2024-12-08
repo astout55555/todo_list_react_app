@@ -10,12 +10,8 @@ function App() {
   const [allTodos, setAllTodos] = useState<TodoType[]>([]);
 
   useEffect(() => {
-    const fetchTodos = async () => {
-      const todos = await todosService.getAllTodos();
-      setAllTodos(todos);
-    }
-    
-    fetchTodos()
+    todosService.getAllTodos()
+      .then(todos => {setAllTodos(todos)})
       .catch((error: unknown) => {console.error(error)});
   }, []);
 
