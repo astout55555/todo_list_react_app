@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import './App.css'
+import { useState, useEffect } from 'react';
+import './App.css';
 import TodoList from './components/TodoList';
 import todosService from './services/todos';
 import {
@@ -7,13 +7,18 @@ import {
 } from './types';
 
 function App() {
-  const [allTodos, setAllTodos] = useState<TodoType[]>([]);
+  const [allTodos, setAllTodos] = useState<TodoType[]>();
 
   useEffect(() => {
     todosService.getAllTodos()
       .then(todos => {setAllTodos(todos)})
-      .catch((error: unknown) => {console.error(error)});
+      .catch((error: unknown) => {console.error(error)}
+    );
   }, []);
+
+  if (!allTodos) {
+    return null;
+  }
 
   return (
       <div id="items" >
@@ -38,4 +43,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
