@@ -2,21 +2,21 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import TodoList from './components/TodoList';
 import todosService from './services/todos';
+import {
+  TodoType
+} from './types';
 
 function App() {
-  const [allTodos, setAllTodos] = useState([]);
-
-  const fetchTodos = async () => {
-    try {
-      const todos = await todosService.getAllTodos();
-      setAllTodos(todos);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  const [allTodos, setAllTodos] = useState<TodoType[]>([]);
 
   useEffect(() => {
-    fetchTodos();
+    const fetchTodos = async () => {
+      const todos = await todosService.getAllTodos();
+      setAllTodos(todos);
+    }
+    
+    fetchTodos()
+      .catch((error: unknown) => {console.error(error)});
   }, []);
 
   return (

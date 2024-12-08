@@ -1,6 +1,9 @@
+import {
+  TodoType,
+  TodoProps,
+} from '../types';
 
-
-const Todo = ({todo}) => {
+const Todo = ({todo}: TodoProps) => {
 
 
   return (

@@ -1,7 +1,11 @@
 import Todo from './Todo';
+import {
+  TodoType,
+  TodoListProps,
+} from '../types';
 
-const TodoList = ({allTodos}) => {
-  const sortByCompletion = (todos) => {
+const TodoList = ({allTodos}: TodoListProps) => {
+  const sortByCompletion = (todos: TodoType[]) => {
     const sortedTodos = todos; // implement sort here
     return sortedTodos;
   }
