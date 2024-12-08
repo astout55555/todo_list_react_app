@@ -20,6 +20,22 @@ function App() {
     return null;
   }
 
+  // const findByID = (todoID: number) => {
+  //   return allTodos.find(todo => todo.id === todoID);
+  // }
+
+  const toggleComplete = async (todo: TodoType) => {
+    try {
+      const updatedTodo = await todosService.updateTodo({...todo, completed: !todo.completed});
+      const nonUpdatedTodos = allTodos.filter(todo => todo.id !== updatedTodo.id);
+      setAllTodos([...nonUpdatedTodos, updatedTodo]);
+      return updatedTodo;
+    } catch (error) {
+      console.error(error);
+      throw new Error('Update failed');
+    }
+  }
+
   return (
       <div id="items" >
         <header>
@@ -35,7 +51,7 @@ function App() {
           </label>
           <table cellSpacing="0">
             <tbody>
-              <TodoList allTodos={allTodos} />
+              <TodoList allTodos={allTodos} toggleComplete={toggleComplete} />
             </tbody>
           </table>
         </main>

@@ -11,6 +11,13 @@ const getAllTodos = async () => {
   return response.data;
 }
 
+const updateTodo = async (updateData: TodoType) => {
+  const todoID = updateData.id.toString();
+  const response = await axios.put<TodoType>(`${baseURL}/${todoID}`, updateData);
+  return response.data;
+}
+
 export default {
   getAllTodos,
+  updateTodo,
 }

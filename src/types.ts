@@ -10,8 +10,10 @@ export interface TodoType {
 
 export interface TodoListProps {
   allTodos: TodoType[],
+  toggleComplete: (todo: TodoType) => Promise<TodoType>,
 }
 
 export interface TodoProps {
   todo: TodoType,
+  toggleComplete: (todo: TodoType) => Promise<TodoType>,
 }
