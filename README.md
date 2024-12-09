@@ -16,8 +16,6 @@
 
 ## Build Plan
 
-1. make the list dynamically organized, placing completed todos on the bottom
-
 2. implement the delete ability linked to the trash can icons (which should highlight when hovered over)
 
 3. build the modal form with appropriate inputs and placeholder text
