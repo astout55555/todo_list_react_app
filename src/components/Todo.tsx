@@ -18,7 +18,7 @@ const Todo = ({todo, toggleComplete}: TodoProps) => {
 
   const dueDate = (todo: TodoType) => {
     if (todo.month !== '' && todo.year !== '') {
-      return `${todo.month}/${todo.year}` // format day & year later
+      return `${todo.month}/${todo.year.slice(2)}`;
     } else {
       return 'No Due Date';
     }
