@@ -1,9 +1,14 @@
 // import { NewModalFormProps } from "../types";
 
 const NewModalForm = () => {
+  const handleBadClickComplete = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    alert('Cannot mark as complete as item has not been created yet!');
+  }
+
   return (
     <div className="modal" id="form_modal" >
-      <form action="" method="post">
+      <form action="" method="post" className="modalForm">
         <fieldset>
           <ul>
             <li>
@@ -86,7 +91,9 @@ const NewModalForm = () => {
             </li>
             <li>
               <input type="submit" value="Save" />
-              <button name="complete">Mark As Complete</button>
+              <button name="complete" onClick={handleBadClickComplete}>
+                Mark As Complete
+              </button>
             </li>
           </ul>
         </fieldset>

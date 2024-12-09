@@ -1,7 +1,7 @@
-import { ModalProps } from "../types";
+import { ModalFormQueryReturn, ModalProps } from "../types";
 import NewModalForm from "./NewModalForm";
 
-const Modal = ({currentTodo, modalVisible, setModalVisible}: ModalProps) => {
+const Modal = ({currentTodo, setCurrentTodo, modalVisible, setModalVisible}: ModalProps) => {
   const modalStyle = () => {
     if (modalVisible) {
       return { display: '' };
@@ -10,8 +10,18 @@ const Modal = ({currentTodo, modalVisible, setModalVisible}: ModalProps) => {
     }
   }
 
+  const resetModalForm = () => {
+    const form = document.querySelector('.modalForm') as ModalFormQueryReturn;
+    if (form) {
+      console.log(form);
+      form.reset();
+    }
+  }
+
   const handleClickOut = () => {
     setModalVisible(false);
+    setCurrentTodo(null);
+    resetModalForm();
   }
 
   if (currentTodo === null) {
@@ -27,7 +37,7 @@ const Modal = ({currentTodo, modalVisible, setModalVisible}: ModalProps) => {
     <div style={modalStyle()} >
       <div className="modal" id="modal_layer" onClick={handleClickOut} ></div>
       <div className="modal" id="form_modal" >
-        <form action="" method="post">
+        <form action="" method="post" className="modalForm">
           <fieldset>
             <ul>
               <li>

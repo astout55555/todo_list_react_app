@@ -2,6 +2,8 @@ import {
   AxiosResponse,
 } from 'axios';
 
+export type ModalFormQueryReturn = null | HTMLFormElement;
+
 export interface TodoType {
   id: number,
   title: string,
@@ -41,6 +43,7 @@ export interface TodoProps {
 
 export interface ModalProps {
   currentTodo: CurrentTodo,
+  setCurrentTodo: React.Dispatch<React.SetStateAction<CurrentTodo>>,
   modalVisible: boolean,
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
 }

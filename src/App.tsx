@@ -16,10 +16,7 @@ function App() {
 
   useEffect(() => {
     todosService.getAllTodos()
-      .then(todos => {
-        setAllTodos(todos)
-        setModalVisible(true); // to view for debugging
-      })
+      .then(todos => {setAllTodos(todos)})
       .catch((error: unknown) => {console.error(error)}
     );
   }, []);
@@ -81,8 +78,8 @@ function App() {
                 removeTodo={removeTodo} />
             </tbody>
           </table>
-          <Modal currentTodo={currentTodo} modalVisible={modalVisible}
-            setModalVisible={setModalVisible} />
+          <Modal currentTodo={currentTodo} setCurrentTodo={setCurrentTodo}
+            modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </main>
       </div>
   )

@@ -16,18 +16,14 @@
 
 ## Build Plan
 
-1. update error handling to avoid duplication?
+1. implement the ability to add a todo using the modal by clicking the `+ Add new to do` link above the table and saving the form after filling it out appropriately
 
-2. build the modal form with appropriate inputs and placeholder text
+2. implement modal function of populating with currentTodo data when opened by clicking on a todo label
 
-3. implement the ability to add a todo using the modal by clicking the `+ Add new to do` link above the table
+3. implement ability to mark/update a todo as complete using modal "mark complete" button
 
-4. implement the ability to edit/update a todo by clicking on its label and changing the information in the modal (which should populate with selected Todo's info)
+4. implement the ability to edit/update a todo by saving after editing modal form
 
-5. implement ability to close modal by clicking outside it, avoiding any add/edit of a todo and resetting the form values for the next time it is opened
+5. add modal form validation so adding/editing respects the form data field specifications expected by the server (and prevents submission with a relevant warning if data requirements not met)
 
-6. implement ability to mark/update a todo as complete using modal "mark complete" button
-
-7. add warning that action cannot be done when user clicks "Mark As Complete" when adding a new todo
-
-8. implement ability to change todo data back to default (empty) values (for every field including "description", but not directly including "due date"--however, "due date" should change back to default "No Due Date" if month/year do not both keep non-default values)
+6. implement ability to change todo data back to default (empty) values (for every field including "description", but not directly including "due date"--however, "due date" should change back to default "No Due Date" if month/year do not both keep non-default values)
