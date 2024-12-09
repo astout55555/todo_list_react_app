@@ -7,15 +7,10 @@ import {
 const Todo = ({todo, toggleComplete}: TodoProps) => {
   const [checked, setChecked] = useState(todo.completed);
 
-  // const isChecked = (todo: TodoType) => {
-  //   return todo.completed;
-  // } // need to add onChange handler to modify checked attribute & completion status
-
-  const handleCheck = () => {
-    console.log('todo before update: ', todo.completed);
+  const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
+    event.stopPropagation(); // reduces duplicate PUT requests, consumes event
     toggleComplete(todo)
       .then(updatedTodo => {
-        console.log('updatedTodo completed: ', updatedTodo.completed);
         setChecked(updatedTodo.completed);
       })
       .catch((error: unknown) => {console.error(error)});
@@ -35,9 +30,11 @@ const Todo = ({todo, toggleComplete}: TodoProps) => {
 
   return (
     <>
-      <td className="list_item">
+      <td className="list_item" onClick={handleClick} >
         <input type="checkbox" name={todoID(todo)} id={todoID(todo)}
-          checked={checked} onChange={handleCheck} />
+          checked={checked} 
+          onChange={() => {setChecked(!checked)}}
+          />
         <span className="check"></span>
         <label htmlFor={todoID(todo)}>{todo.title} - {dueDate(todo)}</label>
       </td>
