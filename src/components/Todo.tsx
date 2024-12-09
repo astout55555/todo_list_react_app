@@ -4,10 +4,10 @@ import {
   TodoProps,
 } from '../types';
 
-const Todo = ({todo, toggleComplete}: TodoProps) => {
+const Todo = ({todo, toggleComplete, removeTodo}: TodoProps) => {
   const [checked, setChecked] = useState(todo.completed);
 
-  const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
+  const handleCheck = (event: React.MouseEvent<HTMLTableCellElement>) => {
     event.stopPropagation(); // reduces duplicate PUT requests, consumes event
     toggleComplete(todo)
       .then(updatedTodo => {
@@ -28,9 +28,15 @@ const Todo = ({todo, toggleComplete}: TodoProps) => {
     return `item_${todo.id.toString()}`;
   }
 
+  const handleDelete = (event: React.MouseEvent<HTMLTableCellElement>) => {
+    event.stopPropagation();
+    removeTodo(todo.id)
+      .catch((error: unknown) => {console.error(error)});
+  }
+
   return (
     <>
-      <td className="list_item" onClick={handleClick} >
+      <td className="list_item" onClick={handleCheck} >
         <input type="checkbox" name={todoID(todo)} id={todoID(todo)}
           checked={checked} 
           onChange={() => {setChecked(!checked)}}
@@ -38,7 +44,7 @@ const Todo = ({todo, toggleComplete}: TodoProps) => {
         <span className="check"></span>
         <label htmlFor={todoID(todo)}>{todo.title} - {dueDate(todo)}</label>
       </td>
-      <td className="delete">
+      <td className="delete" onClick={handleDelete}>
         <img src="images/trash.png" alt="Delete"/>
       </td>
     </>

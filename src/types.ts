@@ -1,3 +1,7 @@
+import {
+  AxiosResponse,
+} from 'axios';
+
 export interface TodoType {
   id: number,
   title: string,
@@ -11,9 +15,16 @@ export interface TodoType {
 export interface TodoListProps {
   allTodos: TodoType[],
   toggleComplete: (todo: TodoType) => Promise<TodoType>,
+  removeTodo: (id: number) => Promise<void>,
 }
 
 export interface TodoProps {
   todo: TodoType,
   toggleComplete: (todo: TodoType) => Promise<TodoType>,
+  removeTodo: (id: number) => Promise<void>,
+}
+
+export interface DeleteResponse extends AxiosResponse {
+  status: 204 | 404,
+  statusText: 'No Content' | 'The todo could not be found.',
 }

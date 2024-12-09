@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import {
+  DeleteResponse,
   TodoType,
 } from '../types';
 
@@ -17,7 +18,14 @@ const updateTodo = async (updateData: TodoType) => {
   return response.data;
 }
 
+const deleteTodo = async (id: number) => {
+  const todoID = id.toString();
+  const response = await axios.delete(`${baseURL}/${todoID}`);
+  return response as DeleteResponse;
+}
+
 export default {
   getAllTodos,
   updateTodo,
+  deleteTodo,
 }

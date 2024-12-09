@@ -3,6 +3,7 @@ import './App.css';
 import TodoList from './components/TodoList';
 import todosService from './services/todos';
 import {
+  DeleteResponse,
   TodoType
 } from './types';
 
@@ -36,6 +37,20 @@ function App() {
     }
   }
 
+  const removeTodo = async (todoID: number): Promise<void> => {
+    try {
+      const response: DeleteResponse = await todosService.deleteTodo(todoID);
+      if (response.status === 204) {
+        setAllTodos(allTodos.filter(todo => todo.id !== todoID));
+      } else {
+        console.log(`404: ${response.statusText}`);
+      }
+    } catch (error) {
+      console.error(error);
+      throw new Error('Deletion failed');
+    }
+  }
+
   return (
       <div id="items" >
         <header>
@@ -51,7 +66,8 @@ function App() {
           </label>
           <table cellSpacing="0">
             <tbody>
-              <TodoList allTodos={allTodos} toggleComplete={toggleComplete} />
+              <TodoList allTodos={allTodos} toggleComplete={toggleComplete}
+                removeTodo={removeTodo} />
             </tbody>
           </table>
         </main>
