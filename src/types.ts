@@ -12,6 +12,8 @@ export interface TodoType {
   description: string
 }
 
+export type CurrentTodo = TodoType | null;
+
 export interface TodoListProps {
   allTodos: TodoType[],
   toggleComplete: (todo: TodoType) => Promise<TodoType>,
@@ -22,6 +24,12 @@ export interface TodoProps {
   todo: TodoType,
   toggleComplete: (todo: TodoType) => Promise<TodoType>,
   removeTodo: (id: number) => Promise<void>,
+}
+
+export interface ModalProps {
+  currentTodo: CurrentTodo,
+  modalVisible: boolean,
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 export interface DeleteResponse extends AxiosResponse {

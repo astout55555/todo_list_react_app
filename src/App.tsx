@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import TodoList from './components/TodoList';
+import Modal from './components/Modal';
 import todosService from './services/todos';
 import {
+  CurrentTodo,
   DeleteResponse,
   TodoType
 } from './types';
 
 function App() {
   const [allTodos, setAllTodos] = useState<TodoType[]>();
+  const [currentTodo, setCurrentTodo] = useState<CurrentTodo>(null);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     todosService.getAllTodos()
@@ -70,6 +74,8 @@ function App() {
                 removeTodo={removeTodo} />
             </tbody>
           </table>
+          <Modal currentTodo={currentTodo} modalVisible={modalVisible}
+            setModalVisible={setModalVisible} />
         </main>
       </div>
   )
