@@ -1,4 +1,5 @@
 import { ModalProps } from "../types";
+import NewModalForm from "./NewModalForm";
 
 const Modal = ({currentTodo, modalVisible, setModalVisible}: ModalProps) => {
   const modalStyle = () => {
@@ -9,14 +10,22 @@ const Modal = ({currentTodo, modalVisible, setModalVisible}: ModalProps) => {
     }
   }
 
-  const textArea = {
-    cols: 50,
-    rows: 7,
-  };
+  const handleClickOut = () => {
+    setModalVisible(false);
+  }
+
+  if (currentTodo === null) {
+    return (
+      <div style={modalStyle()} >
+        <div className="modal" id="modal_layer" onClick={handleClickOut} ></div>
+        <NewModalForm />
+      </div>
+    )
+  }
 
   return (
     <div style={modalStyle()} >
-      <div className="modal" id="modal_layer" ></div>
+      <div className="modal" id="modal_layer" onClick={handleClickOut} ></div>
       <div className="modal" id="form_modal" >
         <form action="" method="post">
           <fieldset>
@@ -96,8 +105,7 @@ const Modal = ({currentTodo, modalVisible, setModalVisible}: ModalProps) => {
               </li>
               <li>
                 <label htmlFor="description">Description</label>
-                <textarea cols={textArea.cols} rows={textArea.rows}
-                  name="description" placeholder="Description"></textarea>
+                <textarea cols={50} rows={7} name="description" placeholder="Description"></textarea>
               </li>
               <li>
                 <input type="submit" value="Save" />

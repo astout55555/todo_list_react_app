@@ -16,7 +16,10 @@ function App() {
 
   useEffect(() => {
     todosService.getAllTodos()
-      .then(todos => {setAllTodos(todos)})
+      .then(todos => {
+        setAllTodos(todos)
+        setModalVisible(true); // to view for debugging
+      })
       .catch((error: unknown) => {console.error(error)}
     );
   }, []);
@@ -55,6 +58,10 @@ function App() {
     }
   }
 
+  const handleClickAdd = () => {
+    setModalVisible(true);
+  }
+
   return (
       <div id="items" >
         <header>
@@ -64,7 +71,7 @@ function App() {
           </dl>
         </header>
         <main>
-          <label htmlFor="new_item">
+          <label htmlFor="new_item" onClick={handleClickAdd} >
             <img src="images/plus.png" alt="Add Todo Item" />
             <h2>Add new to do</h2>
           </label>
