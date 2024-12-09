@@ -9,6 +9,11 @@ const Modal = ({currentTodo, modalVisible, setModalVisible}: ModalProps) => {
     }
   }
 
+  const textArea = {
+    cols: 50,
+    rows: 7,
+  };
+
   return (
     <div style={modalStyle()} >
       <div className="modal" id="modal_layer" ></div>
@@ -72,7 +77,7 @@ const Modal = ({currentTodo, modalVisible, setModalVisible}: ModalProps) => {
                     <option value="11">November</option>
                     <option value="12">December</option>
                   </select> /
-                  <select id="due_year" name="due_year" placeholder="year">
+                  <select id="due_year" name="due_year">
                     <option>Year</option>
                     <option>2014</option>
                     <option>2015</option>
@@ -91,7 +96,8 @@ const Modal = ({currentTodo, modalVisible, setModalVisible}: ModalProps) => {
               </li>
               <li>
                 <label htmlFor="description">Description</label>
-                <textarea cols="50" name="description" rows="7" placeholder="Description"></textarea>
+                <textarea cols={textArea.cols} rows={textArea.rows}
+                  name="description" placeholder="Description"></textarea>
               </li>
               <li>
                 <input type="submit" value="Save" />
