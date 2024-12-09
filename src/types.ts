@@ -1,7 +1,3 @@
-import {
-  AxiosResponse,
-} from 'axios';
-
 export type ModalFormQueryReturn = null | HTMLFormElement;
 
 export interface TodoType {
@@ -46,9 +42,4 @@ export interface ModalProps {
   setCurrentTodo: React.Dispatch<React.SetStateAction<CurrentTodo>>,
   modalVisible: boolean,
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
-}
-
-export interface DeleteResponse extends AxiosResponse {
-  status: 204 | 404,
-  statusText: 'No Content' | 'The todo could not be found.',
 }

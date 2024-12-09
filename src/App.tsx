@@ -5,7 +5,6 @@ import Modal from './components/Modal';
 import todosService from './services/todos';
 import {
   CurrentTodo,
-  DeleteResponse,
   TodoType
 } from './types';
 
@@ -43,12 +42,8 @@ function App() {
 
   const removeTodo = async (todoID: number): Promise<void> => {
     try {
-      const response: DeleteResponse = await todosService.deleteTodo(todoID);
-      if (response.status === 204) {
-        setAllTodos(allTodos.filter(todo => todo.id !== todoID));
-      } else {
-        console.log(`404: ${response.statusText}`);
-      }
+      await todosService.deleteTodo(todoID);
+      setAllTodos(allTodos.filter(todo => todo.id !== todoID));
     } catch (error) {
       console.error(error);
       throw new Error('Deletion failed');

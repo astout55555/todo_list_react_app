@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import {
-  DeleteResponse,
+  NewTodo,
   TodoType,
 } from '../types';
 
@@ -20,12 +20,18 @@ const updateTodo = async (updateData: TodoType) => {
 
 const deleteTodo = async (id: number) => {
   const todoID = id.toString();
-  const response = await axios.delete(`${baseURL}/${todoID}`);
-  return response as DeleteResponse;
+  const response = await axios.delete<''>(`${baseURL}/${todoID}`);
+  return response;
+}
+
+const addTodo = async (todoInfo: NewTodo) => {
+  const response = await axios.post<TodoType>(baseURL, todoInfo);
+  return response.data;
 }
 
 export default {
   getAllTodos,
   updateTodo,
   deleteTodo,
+  addTodo,
 }
