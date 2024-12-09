@@ -10,7 +10,6 @@ export interface TodoType {
   description: string
 }
 
-// not currently in use
 export interface NewTodo {
   title: string,
   day?: string,
@@ -33,13 +32,15 @@ export interface TodoProps {
   removeTodo: (id: number) => Promise<void>,
 }
 
-// export interface NewModalFormProps {
-  // later: accept functions from Modal for handling "complete" and "save" buttons
-// }
+export interface NewModalFormProps {
+  createTodo: (newTodoData: NewTodo) => Promise<void>,
+  // later: accept function from Modal for handling "complete" button
+}
 
 export interface ModalProps {
   currentTodo: CurrentTodo,
   setCurrentTodo: React.Dispatch<React.SetStateAction<CurrentTodo>>,
   modalVisible: boolean,
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
+  createTodo: (newTodoData: NewTodo) => Promise<void>,
 }

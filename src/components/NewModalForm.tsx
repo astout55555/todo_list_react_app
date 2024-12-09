@@ -1,6 +1,6 @@
-// import { NewModalFormProps } from "../types";
+import { NewModalFormProps } from "../types";
 
-const NewModalForm = () => {
+const NewModalForm = ({createTodo}: NewModalFormProps) => {
   const handleBadClickComplete = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     alert('Cannot mark as complete as item has not been created yet!');

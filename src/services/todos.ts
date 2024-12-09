@@ -18,10 +18,9 @@ const updateTodo = async (updateData: TodoType) => {
   return response.data;
 }
 
-const deleteTodo = async (id: number) => {
+const deleteTodo = async (id: number): Promise<void> => {
   const todoID = id.toString();
-  const response = await axios.delete<''>(`${baseURL}/${todoID}`);
-  return response;
+  await axios.delete<''>(`${baseURL}/${todoID}`);
 }
 
 const addTodo = async (todoInfo: NewTodo) => {

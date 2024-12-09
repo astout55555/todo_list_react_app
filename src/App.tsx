@@ -5,6 +5,7 @@ import Modal from './components/Modal';
 import todosService from './services/todos';
 import {
   CurrentTodo,
+  NewTodo,
   TodoType
 } from './types';
 
@@ -50,6 +51,16 @@ function App() {
     }
   }
 
+  const createTodo = async (newTodoData: NewTodo) => {
+    try {
+      const addedTodo = await todosService.addTodo(newTodoData);
+      setAllTodos([...allTodos, addedTodo]);
+    } catch (error) {
+      console.error(error);
+      throw new Error('Todo creation failed');
+    }
+  }
+
   const handleClickAdd = () => {
     setModalVisible(true);
   }
@@ -74,7 +85,8 @@ function App() {
             </tbody>
           </table>
           <Modal currentTodo={currentTodo} setCurrentTodo={setCurrentTodo}
-            modalVisible={modalVisible} setModalVisible={setModalVisible} />
+            modalVisible={modalVisible} setModalVisible={setModalVisible}
+            createTodo={createTodo} />
         </main>
       </div>
   )

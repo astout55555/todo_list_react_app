@@ -1,7 +1,10 @@
 import { ModalFormQueryReturn, ModalProps } from "../types";
 import NewModalForm from "./NewModalForm";
 
-const Modal = ({currentTodo, setCurrentTodo, modalVisible, setModalVisible}: ModalProps) => {
+const Modal = (
+  {currentTodo, setCurrentTodo, modalVisible, setModalVisible, createTodo}: ModalProps
+) => {
+
   const modalStyle = () => {
     if (modalVisible) {
       return { display: '' };
@@ -28,7 +31,7 @@ const Modal = ({currentTodo, setCurrentTodo, modalVisible, setModalVisible}: Mod
     return (
       <div style={modalStyle()} >
         <div className="modal" id="modal_layer" onClick={handleClickOut} ></div>
-        <NewModalForm />
+        <NewModalForm createTodo={createTodo} />
       </div>
     )
   }
