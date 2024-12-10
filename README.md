@@ -4,8 +4,6 @@
 
 # Development Plan
 
-[testing how git works a bit...]
-
 ## General Design
 
 1. copy over all html as the returned jsx/tsx for the app component. not using handlebars for this version, so each handlebars script tag should be replaced by a component handling the same stuff, which will use that markup itself instead
@@ -17,9 +15,20 @@
 4. when todo is selected, change `currentTodo` state by selecting the correct Todo from the list using its ID (accessible as data on the element?) - use `currentTodo` info to populate modal - change state to null when modal is closed
 5. use Modal component in flexible way to handle updates and new todos--form data controlled using state, so I don't have to duplicate large amounts of JSX and pass on so many properties a layer deeper to a conditionally rendered NewModal
 
+## Modal Consolidation Plan
+
+1. currentTodo starts with value `null` [done]
+2. handleClick on label in Todo component should setCurrentTodo to that todo [done]
+3. clickOut from modal should setCurrentTodo to null [done]
+4. modal display logic should respond to display modal when currentTodo is not null [done]
+5. remove ineffective reset form code which doesn't account for component states (formData is set by managing state, overriding the HTML form element's values)
+6. [bug]: click on label should not also check the todo off / update todo as complete
+7. [restructure]: should not be tracking both `modalVisible` and `currentTodo` states, such that the modal can be displayed because `currentTodo` is not null, while `modalVisible` is still false. see step 8 for implementing this:
+8. when modal is rendered (`useEffect` with `currentTodo` dependency), if currentTodo, setModalVisible to true, setFormData to match values from currentTodo (and setModalVisible to false and setFormData to defaults if currentTodo is null)
+
 ## Build Plan
 
-0. implement changes required to follow design point 5 above -- consolidate components and set formData state appropriately
+0. implement changes required to follow design point 5 above -- consolidate components and set formData state appropriately (see Modal Consolidation Plan above)
 
 1. implement the ability to add a todo using the modal by clicking the `+ Add new to do` link above the table and saving the form after filling it out appropriately
 

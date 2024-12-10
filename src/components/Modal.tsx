@@ -18,7 +18,7 @@ const Modal = (
   });
 
   const modalStyle = () => {
-    if (modalVisible) {
+    if (modalVisible || currentTodo) {
       return { display: '' };
     } else {
       return { display: 'none'};

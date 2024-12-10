@@ -81,7 +81,7 @@ function App() {
           <table cellSpacing="0">
             <tbody>
               <TodoList allTodos={allTodos} toggleComplete={toggleComplete}
-                removeTodo={removeTodo} />
+                removeTodo={removeTodo} setCurrentTodo={setCurrentTodo} />
             </tbody>
           </table>
           <Modal currentTodo={currentTodo} setCurrentTodo={setCurrentTodo}
