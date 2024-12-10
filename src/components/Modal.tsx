@@ -1,9 +1,21 @@
-import { ModalFormQueryReturn, ModalProps } from "../types";
+import { useState } from 'react';
+import {
+  ModalFormQueryReturn,
+  ModalProps,
+  NewTodo,
+} from "../types";
 import NewModalForm from "./NewModalForm";
 
 const Modal = (
   {currentTodo, setCurrentTodo, modalVisible, setModalVisible, createTodo}: ModalProps
 ) => {
+  const [formData, setFormData] = useState<NewTodo>({
+    title: '',
+    day: '',
+    month: '',
+    year: '',
+    description: '',
+  });
 
   const modalStyle = () => {
     if (modalVisible) {
@@ -17,7 +29,7 @@ const Modal = (
     const form = document.querySelector('.modalForm') as ModalFormQueryReturn;
     if (form) {
       console.log(form);
-      form.reset();
+      form.reset(); // doesn't work for controlled inputs, value is set by state
     }
   }
 
@@ -27,11 +39,18 @@ const Modal = (
     resetModalForm();
   }
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  } // will also need to handle other types of events/elements...
+
   if (currentTodo === null) {
     return (
       <div style={modalStyle()} >
         <div className="modal" id="modal_layer" onClick={handleClickOut} ></div>
-        <NewModalForm createTodo={createTodo} />
+        <NewModalForm createTodo={createTodo} handleChange={handleChange} formData={formData} />
       </div>
     )
   }

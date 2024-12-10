@@ -1,24 +1,33 @@
-import { NewModalFormProps } from "../types";
+import { useState } from 'react';
+import { NewModalFormProps,
+  NewTodo
+ } from "../types";
 
-const NewModalForm = ({createTodo}: NewModalFormProps) => {
+const NewModalForm = ({createTodo, handleChange, formData}: NewModalFormProps) => {
   const handleBadClickComplete = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     alert('Cannot mark as complete as item has not been created yet!');
   }
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+  }
+
   return (
     <div className="modal" id="form_modal" >
-      <form action="" method="post" className="modalForm">
+      <form action="" method="post" className="modalForm" onSubmit={handleSubmit}>
         <fieldset>
           <ul>
             <li>
               <label htmlFor="title">Title</label>
-              <input type="text" name="title" id="title" placeholder="Item 1"/>
+              <input type="text" name="title" id="title" placeholder="Item 1"
+                onChange={handleChange} value={formData.title} />
             </li>
             <li>
               <label htmlFor="due">Due Date</label>
               <div className="date">
-                <select id="due_day" name="due_day">
+                <select id="day" name="day">
                   <option>Day</option>
                   <option value="01">1</option>
                   <option value="02">2</option>
@@ -52,7 +61,7 @@ const NewModalForm = ({createTodo}: NewModalFormProps) => {
                   <option value="30">30</option>
                   <option value="31">31</option>
                 </select>  /
-                <select id="due_month" name="due_month">
+                <select id="month" name="month">
                   <option>Month</option>
                   <option value="01">January</option>
                   <option value="02">February</option>
@@ -67,7 +76,7 @@ const NewModalForm = ({createTodo}: NewModalFormProps) => {
                   <option value="11">November</option>
                   <option value="12">December</option>
                 </select> /
-                <select id="due_year" name="due_year">
+                <select id="year" name="year">
                   <option>Year</option>
                   <option>2014</option>
                   <option>2015</option>

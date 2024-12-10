@@ -13,8 +13,11 @@
   -ensure CRUD operations are reflected in the server and the browser / component states
 3. fetch all todos from the server on load with `useEffect` hook
 4. when todo is selected, change `currentTodo` state by selecting the correct Todo from the list using its ID (accessible as data on the element?) - use `currentTodo` info to populate modal - change state to null when modal is closed
+5. use Modal component in flexible way to handle updates and new todos--form data controlled using state, so I don't have to duplicate large amounts of JSX and pass on so many properties a layer deeper to a conditionally rendered NewModal
 
 ## Build Plan
+
+0. implement changes required to follow design point 5 above -- consolidate components and set formData state appropriately
 
 1. implement the ability to add a todo using the modal by clicking the `+ Add new to do` link above the table and saving the form after filling it out appropriately
 
