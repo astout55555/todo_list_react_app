@@ -4,6 +4,8 @@
 
 # Development Plan
 
+[testing how git works a bit...]
+
 ## General Design
 
 1. copy over all html as the returned jsx/tsx for the app component. not using handlebars for this version, so each handlebars script tag should be replaced by a component handling the same stuff, which will use that markup itself instead
