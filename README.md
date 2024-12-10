@@ -17,14 +17,9 @@
 
 ## Modal Consolidation Plan
 
-1. currentTodo starts with value `null` [done]
-2. handleClick on label in Todo component should setCurrentTodo to that todo [done]
-3. clickOut from modal should setCurrentTodo to null [done]
-4. modal display logic should respond to display modal when currentTodo is not null [done]
-5. remove ineffective reset form code which doesn't account for component states (formData is set by managing state, overriding the HTML form element's values)
-6. [bug]: click on label should not also check the todo off / update todo as complete
-7. [restructure]: should not be tracking both `modalVisible` and `currentTodo` states, such that the modal can be displayed because `currentTodo` is not null, while `modalVisible` is still false. see step 8 for implementing this:
-8. when modal is rendered (`useEffect` with `currentTodo` dependency), if currentTodo, setModalVisible to true, setFormData to match values from currentTodo (and setModalVisible to false and setFormData to defaults if currentTodo is null)
+1. [bug] event delegation logic for check vs select todo is not completely typed correctly
+2. [restructure]: should not be tracking both `modalVisible` and `currentTodo` states, such that the modal can be displayed because `currentTodo` is not null, while `modalVisible` is still false. see step 8 for implementing this:
+3. when modal is rendered (`useEffect` with `currentTodo` dependency), if currentTodo, setModalVisible to true, setFormData to match values from currentTodo (and setModalVisible to false and setFormData to defaults if currentTodo is null)
 
 ## Build Plan
 

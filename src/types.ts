@@ -1,5 +1,3 @@
-export type ModalFormQueryReturn = null | HTMLFormElement;
-
 export interface TodoType {
   id: number,
   title: string,

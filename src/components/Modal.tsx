@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import {
-  ModalFormQueryReturn,
   ModalProps,
   NewTodo,
 } from "../types";
@@ -25,18 +24,9 @@ const Modal = (
     }
   }
 
-  const resetModalForm = () => {
-    const form = document.querySelector('.modalForm') as ModalFormQueryReturn;
-    if (form) {
-      console.log(form);
-      form.reset(); // doesn't work for controlled inputs, value is set by state
-    }
-  }
-
   const handleClickOut = () => {
     setModalVisible(false);
     setCurrentTodo(null);
-    resetModalForm();
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

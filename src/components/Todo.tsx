@@ -39,15 +39,23 @@ const Todo = ({todo, toggleComplete, removeTodo, setCurrentTodo}: TodoProps) => 
       .catch((error: unknown) => {console.error(error)});
   }
 
+  const handleItemClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
+    if (event.target instanceof HTMLLabelElement) {
+      handleSelect(event);
+    } else {
+      handleCheck(event);
+    }
+  }
+
   return (
     <>
-      <td className="list_item" onClick={handleCheck} >
+      <td className="list_item" onClick={handleItemClick}>
         <input type="checkbox" name={todoID(todo)} id={todoID(todo)}
           checked={checked} 
           onChange={() => {setChecked(!checked)}}
           />
         <span className="check"></span>
-        <label htmlFor={todoID(todo)} onClick={handleSelect} >
+        <label htmlFor={todoID(todo)}>
           {todo.title} - {dueDate(todo)}
         </label>
       </td>
