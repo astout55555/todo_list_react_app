@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   ModalProps,
   NewTodo,
@@ -7,16 +7,17 @@ import {
 const Modal = (
   {currentTodo, setCurrentTodo, modalVisible, setModalVisible, createTodo}: ModalProps
 ) => {
-  const [formData, setFormData] = useState<NewTodo>({
-    title: '',
-    day: '',
-    month: '',
-    year: '',
-    description: '',
-  });
+  const [formData, setFormData] = useState<NewTodo>({title: ''});
+
+  useEffect(() => {
+    if (currentTodo) {
+      setModalVisible(true);
+      // and setFormData to the values of the selected todo
+    } // else, setFormData to empty strings / defaults
+  }, [currentTodo, setModalVisible]);
 
   const modalStyle = () => {
-    if (modalVisible || currentTodo) {
+    if (modalVisible) {
       return { display: '' };
     } else {
       return { display: 'none'};
@@ -26,6 +27,7 @@ const Modal = (
   const handleClickOut = () => {
     setModalVisible(false);
     setCurrentTodo(null);
+    setFormData({title: '', day: '', month: '', year: '', description: ''});
   }
 
   const handleCompleteClick = (event: React.MouseEvent<HTMLButtonElement>) => {
