@@ -4,7 +4,7 @@ import {
   TodoListProps,
 } from '../types';
 
-const TodoList = ({allTodos, toggleComplete, removeTodo}: TodoListProps) => {
+const TodoList = ({allTodos, toggleComplete, removeTodo, setCurrentTodo}: TodoListProps) => {
   const toSortedByCompletion = (todos: TodoType[]) => {
     return [...todos].sort((todoA: TodoType, todoB: TodoType): number => {
       if (todoA.completed && !todoB.completed) {
@@ -21,7 +21,8 @@ const TodoList = ({allTodos, toggleComplete, removeTodo}: TodoListProps) => {
     return toSortedByCompletion(allTodos).map(todo => {
       return (
         <tr key={todo.id} data-id={todo.id} >
-          <Todo todo={todo} toggleComplete={toggleComplete} removeTodo={removeTodo} />
+          <Todo todo={todo} toggleComplete={toggleComplete}
+            removeTodo={removeTodo} setCurrentTodo={setCurrentTodo} />
         </tr>
       );
     });

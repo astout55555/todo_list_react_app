@@ -4,11 +4,10 @@ import {
   TodoProps,
 } from '../types';
 
-const Todo = ({todo, toggleComplete, removeTodo}: TodoProps) => {
+const Todo = ({todo, toggleComplete, removeTodo, setCurrentTodo}: TodoProps) => {
   const [checked, setChecked] = useState(todo.completed);
 
-  const handleCheck = (event: React.MouseEvent<HTMLTableCellElement>) => {
-    event.stopPropagation(); // reduces duplicate PUT requests, consumes event
+  const handleCheck = () => {
     toggleComplete(todo)
       .then(updatedTodo => {
         setChecked(updatedTodo.completed);
@@ -28,21 +27,36 @@ const Todo = ({todo, toggleComplete, removeTodo}: TodoProps) => {
     return `item_${todo.id.toString()}`;
   }
 
+  const handleSelect = (event: React.MouseEvent<HTMLTableCellElement>) => {
+    event.preventDefault();
+    setCurrentTodo(todo);
+  }
+
   const handleDelete = (event: React.MouseEvent<HTMLTableCellElement>) => {
     event.stopPropagation();
     removeTodo(todo.id)
       .catch((error: unknown) => {console.error(error)});
   }
 
+  const handleItemClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
+    if (event.target instanceof HTMLLabelElement) {
+      handleSelect(event);
+    } else {
+      handleCheck();
+    }
+  }
+
   return (
     <>
-      <td className="list_item" onClick={handleCheck} >
+      <td className="list_item" onClick={handleItemClick}>
         <input type="checkbox" name={todoID(todo)} id={todoID(todo)}
           checked={checked} 
           onChange={() => {setChecked(!checked)}}
           />
         <span className="check"></span>
-        <label htmlFor={todoID(todo)}>{todo.title} - {dueDate(todo)}</label>
+        <label htmlFor={todoID(todo)}>
+          {todo.title} - {dueDate(todo)}
+        </label>
       </td>
       <td className="delete" onClick={handleDelete}>
         <img src="images/trash.png" alt="Delete"/>
