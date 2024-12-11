@@ -59,11 +59,8 @@ const Modal = (
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // implement form submission here, add or update depending on currentTodo
     if (currentTodo) {
       // update current Todo
-      console.log(`Current todo: `, currentTodo);
-      console.log('Form data: ', formData);
       const updateData: TodoType = {
         id: Number(currentTodo.id),
         completed: currentTodo.completed,
@@ -74,6 +71,9 @@ const Modal = (
         .catch((error: unknown) => {console.error(error)});
     } else {
       // add new todo
+      createTodo(formData)
+        .then(() => {handleClickOut()})
+        .catch((error: unknown) => {console.error(error)});
     }
   }
 
