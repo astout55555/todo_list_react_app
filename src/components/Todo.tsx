@@ -7,8 +7,7 @@ import {
 const Todo = ({todo, toggleComplete, removeTodo, setCurrentTodo}: TodoProps) => {
   const [checked, setChecked] = useState(todo.completed);
 
-  const handleCheck = (event: React.MouseEvent<HTMLTableCellElement>) => {
-    event.stopPropagation(); // reduces duplicate PUT requests, consumes event
+  const handleCheck = () => {
     toggleComplete(todo)
       .then(updatedTodo => {
         setChecked(updatedTodo.completed);
@@ -28,7 +27,7 @@ const Todo = ({todo, toggleComplete, removeTodo, setCurrentTodo}: TodoProps) => 
     return `item_${todo.id.toString()}`;
   }
 
-  const handleSelect = (event: React.MouseEvent<HTMLLabelElement>) => {
+  const handleSelect = (event: React.MouseEvent<HTMLTableCellElement>) => {
     event.preventDefault();
     setCurrentTodo(todo);
   }
@@ -43,7 +42,7 @@ const Todo = ({todo, toggleComplete, removeTodo, setCurrentTodo}: TodoProps) => 
     if (event.target instanceof HTMLLabelElement) {
       handleSelect(event);
     } else {
-      handleCheck(event);
+      handleCheck();
     }
   }
 

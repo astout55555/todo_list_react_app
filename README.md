@@ -17,23 +17,22 @@
 
 ## Modal Consolidation Plan
 
-1. [bug] event delegation logic for check vs select todo is not completely typed correctly
-2. [restructure]: should not be tracking both `modalVisible` and `currentTodo` states, such that the modal can be displayed because `currentTodo` is not null, while `modalVisible` is still false. see step 3 & 4 for implementing this:
-3. when modal is rendered (`useEffect` with `currentTodo` dependency), if currentTodo, setModalVisible to true, setFormData to match values from currentTodo (and setModalVisible to false and setFormData to defaults if currentTodo is null)
-4. as part of implementing 3, must change JSX to control the various data inputs with the associated input states. will need to vary approach/typing based on types of elements
+1. [restructure]: should not be tracking both `modalVisible` and `currentTodo` states, such that the modal can be displayed because `currentTodo` is not null, while `modalVisible` is still false. see steps 2 & 3 for implementing this:
+2. when modal is rendered (`useEffect` with `currentTodo` dependency), if currentTodo, setModalVisible to true, setFormData to match values from currentTodo (and setModalVisible to false and setFormData to defaults if currentTodo is null)
+3. as part of implementing 2, must change JSX to control the various data inputs with the associated input states. will need to vary approach/typing based on types of elements
+
+4. when submitting modal form, use conditional flow based on value of currentTodo to decide whether to update or add a todo (part of solution to implement build plan points 2 and 3 below)
 
 ## Build Plan
 
-0. implement changes required to follow design point 5 above -- consolidate components and set formData state appropriately (see Modal Consolidation Plan above)
+0. unrelated, but I noticed a recommendation online to run `npm install --save-dev @tsconfig/vite-react` and also put `"extends": "@tsconfig/vite-react/tsconfig.json"` in my tsconfig.json file...might change how the typing is getting linted...
 
-1. implement the ability to add a todo using the modal by clicking the `+ Add new to do` link above the table and saving the form after filling it out appropriately
+1. implement ability to mark/update a todo as complete using modal "mark complete" button
 
-2. implement modal function of populating with currentTodo data when opened by clicking on a todo label
+2. implement the ability to edit/update a todo by saving after editing modal form
 
-3. implement ability to mark/update a todo as complete using modal "mark complete" button
+3. implement the ability to add a todo using the modal by clicking the `+ Add new to do` link above the table and saving the form after filling it out appropriately
 
-4. implement the ability to edit/update a todo by saving after editing modal form
+4. add modal form validation so adding/editing respects the form data field specifications expected by the server (and prevents submission with a relevant warning if data requirements not met)
 
-5. add modal form validation so adding/editing respects the form data field specifications expected by the server (and prevents submission with a relevant warning if data requirements not met)
-
-6. implement ability to change todo data back to default (empty) values (for every field including "description", but not directly including "due date"--however, "due date" should change back to default "No Due Date" if month/year do not both keep non-default values)
+5. implement ability to change todo data back to default (empty) values (for every field including "description", but not directly including "due date"--however, "due date" should change back to default "No Due Date" if month/year do not both keep non-default values)

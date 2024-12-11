@@ -3,7 +3,6 @@ import {
   ModalProps,
   NewTodo,
 } from "../types";
-import NewModalForm from "./NewModalForm";
 
 const Modal = (
   {currentTodo, setCurrentTodo, modalVisible, setModalVisible, createTodo}: ModalProps
@@ -29,6 +28,13 @@ const Modal = (
     setCurrentTodo(null);
   }
 
+  const handleCompleteClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    if (currentTodo === null) {
+      alert('Cannot mark as complete as item has not been created yet!');
+    } // add else conditional flow to handle marking existing todo complete
+  } // best done with function defined and passed down from App component
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -36,30 +42,27 @@ const Modal = (
     });
   } // will also need to handle other types of events/elements...
 
-  if (currentTodo === null) {
-    return (
-      <div style={modalStyle()} >
-        <div className="modal" id="modal_layer" onClick={handleClickOut} ></div>
-        <NewModalForm createTodo={createTodo} handleChange={handleChange} formData={formData} />
-      </div>
-    )
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // implement form submission here, add or update depending on currentTodo
   }
 
   return (
     <div style={modalStyle()} >
       <div className="modal" id="modal_layer" onClick={handleClickOut} ></div>
-      <div className="modal" id="form_modal" >
-        <form action="" method="post" className="modalForm">
+      <div className="modal" id="form_modal">
+        <form action="" method="post" className="modalForm" onSubmit={handleSubmit}>
           <fieldset>
             <ul>
               <li>
                 <label htmlFor="title">Title</label>
-                <input type="text" name="title" id="title" placeholder="Item 1"/>
+                <input type="text" name="title" id="title" placeholder="Item 1"
+                  onChange={handleChange} value={formData.title} />
               </li>
               <li>
                 <label htmlFor="due">Due Date</label>
                 <div className="date">
-                  <select id="due_day" name="due_day">
+                  <select id="day" name="day">
                     <option>Day</option>
                     <option value="01">1</option>
                     <option value="02">2</option>
@@ -93,7 +96,7 @@ const Modal = (
                     <option value="30">30</option>
                     <option value="31">31</option>
                   </select>  /
-                  <select id="due_month" name="due_month">
+                  <select id="month" name="month">
                     <option>Month</option>
                     <option value="01">January</option>
                     <option value="02">February</option>
@@ -108,7 +111,7 @@ const Modal = (
                     <option value="11">November</option>
                     <option value="12">December</option>
                   </select> /
-                  <select id="due_year" name="due_year">
+                  <select id="year" name="year">
                     <option>Year</option>
                     <option>2014</option>
                     <option>2015</option>
@@ -131,7 +134,7 @@ const Modal = (
               </li>
               <li>
                 <input type="submit" value="Save" />
-                <button name="complete">Mark As Complete</button>
+                <button name="complete" onClick={handleCompleteClick}>Mark As Complete</button>
               </li>
             </ul>
           </fieldset>
