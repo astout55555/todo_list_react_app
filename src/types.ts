@@ -41,3 +41,5 @@ export interface ModalProps {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
   createTodo: (newTodoData: NewTodo) => Promise<void>,
 }
+
+export type ModalFormControl = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;

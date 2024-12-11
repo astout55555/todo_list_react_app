@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
+  ModalFormControl,
   ModalProps,
   NewTodo,
 } from "../types";
@@ -37,12 +38,12 @@ const Modal = (
     } // add else conditional flow to handle marking existing todo complete
   } // best done with function defined and passed down from App component
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<ModalFormControl>) => {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
     });
-  } // will also need to handle other types of events/elements...
+  }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -64,7 +65,7 @@ const Modal = (
               <li>
                 <label htmlFor="due">Due Date</label>
                 <div className="date">
-                  <select id="day" name="day">
+                  <select id="day" name="day" onChange={handleChange} value={formData.day}>
                     <option>Day</option>
                     <option value="01">1</option>
                     <option value="02">2</option>
@@ -98,7 +99,7 @@ const Modal = (
                     <option value="30">30</option>
                     <option value="31">31</option>
                   </select>  /
-                  <select id="month" name="month">
+                  <select id="month" name="month" onChange={handleChange} value={formData.month}>
                     <option>Month</option>
                     <option value="01">January</option>
                     <option value="02">February</option>
@@ -113,7 +114,7 @@ const Modal = (
                     <option value="11">November</option>
                     <option value="12">December</option>
                   </select> /
-                  <select id="year" name="year">
+                  <select id="year" name="year" onChange={handleChange} value={formData.year}>
                     <option>Year</option>
                     <option>2014</option>
                     <option>2015</option>
@@ -132,11 +133,14 @@ const Modal = (
               </li>
               <li>
                 <label htmlFor="description">Description</label>
-                <textarea cols={50} rows={7} name="description" placeholder="Description"></textarea>
+                <textarea cols={50} rows={7} name="description" value={formData.description}
+                  placeholder="Description" onChange={handleChange}></textarea>
               </li>
               <li>
                 <input type="submit" value="Save" />
-                <button name="complete" onClick={handleCompleteClick}>Mark As Complete</button>
+                <button name="complete" onClick={handleCompleteClick}>
+                  Mark As Complete
+                </button>
               </li>
             </ul>
           </fieldset>
