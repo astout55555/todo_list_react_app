@@ -6,7 +6,7 @@ import {
 } from "../types";
 
 const Modal = (
-  {currentTodo, setCurrentTodo, modalVisible, setModalVisible, createTodo}: ModalProps
+  {currentTodo, setCurrentTodo, modalVisible, setModalVisible, toggleComplete, createTodo}: ModalProps
 ) => {
   const [formData, setFormData] = useState<NewTodo>({title: ''});
 
@@ -14,8 +14,8 @@ const Modal = (
     if (currentTodo) {
       setModalVisible(true);
       /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-      const {id, ...updatableProps} = currentTodo;
-      setFormData({...updatableProps});
+      const {id, completed, ...updatableFormProps} = currentTodo;
+      setFormData({...updatableFormProps});
     }
   }, [currentTodo, setModalVisible]);
 
@@ -37,8 +37,13 @@ const Modal = (
     event.preventDefault();
     if (currentTodo === null) {
       alert('Cannot mark as complete as item has not been created yet!');
-    } // add else conditional flow to handle marking existing todo complete
-  } // best done with function defined and passed down from App component
+    } else {
+      if (!currentTodo.completed) {
+        toggleComplete(currentTodo)
+          .catch((error: unknown) => {console.error(error)});
+      }
+    }
+  }
 
   const handleChange = (event: React.ChangeEvent<ModalFormControl>) => {
     setFormData({

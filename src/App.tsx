@@ -86,7 +86,7 @@ function App() {
           </table>
           <Modal currentTodo={currentTodo} setCurrentTodo={setCurrentTodo}
             modalVisible={modalVisible} setModalVisible={setModalVisible}
-            createTodo={createTodo} />
+            createTodo={createTodo} toggleComplete={toggleComplete} />
         </main>
       </div>
   )

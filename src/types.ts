@@ -19,17 +19,18 @@ export interface NewTodo {
 export type CurrentTodo = TodoType | null;
 
 type SetCurrentTodoType = React.Dispatch<React.SetStateAction<CurrentTodo>>;
+type ToggleCompleteType = (todo: TodoType) => Promise<TodoType>;
 
 export interface TodoListProps {
   allTodos: TodoType[],
-  toggleComplete: (todo: TodoType) => Promise<TodoType>,
+  toggleComplete: ToggleCompleteType,
   removeTodo: (id: number) => Promise<void>,
   setCurrentTodo: SetCurrentTodoType,
 }
 
 export interface TodoProps {
   todo: TodoType,
-  toggleComplete: (todo: TodoType) => Promise<TodoType>,
+  toggleComplete: ToggleCompleteType,
   removeTodo: (id: number) => Promise<void>,
   setCurrentTodo: SetCurrentTodoType,
 }
@@ -40,6 +41,7 @@ export interface ModalProps {
   modalVisible: boolean,
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
   createTodo: (newTodoData: NewTodo) => Promise<void>,
+  toggleComplete: ToggleCompleteType,
 }
 
 export type ModalFormControl = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
