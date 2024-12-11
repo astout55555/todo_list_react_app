@@ -19,6 +19,4 @@
 
 0. unrelated, but I noticed a recommendation online to run `npm install --save-dev @tsconfig/vite-react` and also put `"extends": "@tsconfig/vite-react/tsconfig.json"` in my tsconfig.json file...might change how the typing is getting linted...
 
-1. add modal form validation so adding/editing respects the form data field specification for the title as expected by the server (and prevents submission with a relevant warning if data requirement of minimum 3 chars is not met)
-
-2. implement ability to change todo data back to default (empty) value for "description"
+1. implement ability to change todo data back to default (empty) value for "description"

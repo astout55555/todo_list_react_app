@@ -47,25 +47,26 @@ const Modal = (
     }
   }
 
-  // const validateFormData = (inputData: NewTodo) => {
-  //   const data = {...inputData};
+  // const updateToBlankDescription = (inputData: NewTodo) => {
 
-  //   // validate the title somehow (minimum of 3 characters...)
-  //   // validate description / allow reset to blank value somehow...
+    // allow reset to blank value somehow...
 
-  //   return data;
   // }
 
   const handleChange = (event: React.ChangeEvent<ModalFormControl>) => {
-    // const validatedData = validateFormData(formData);
     setFormData({
-      ...formData, // ...validatedData,
+      ...formData,
       [event.target.name]: event.target.value,
     });
   }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (formData.title.length < 3) {
+      alert('You must enter a title at least 3 characters long.');
+      return;
+    }
+
     if (currentTodo) {
       // update current Todo
       const updateData: TodoType = {
