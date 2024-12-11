@@ -6,10 +6,11 @@ import {
 const Todo = ({todo, toggleComplete, removeTodo, setCurrentTodo}: TodoProps) => {
   const dueDate = (todo: TodoType) => {
     if (todo.month && todo.year) {
-      return `${todo.month}/${todo.year.slice(2)}`;
-    } else {
-      return 'No Due Date';
+      if (todo.month.trim() !== '' && todo.year.trim() !== '') {
+        return `${todo.month}/${todo.year.slice(2)}`;
+      } 
     }
+    return 'No Due Date';
   }
 
   const todoID = (todo: TodoType) => {

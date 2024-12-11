@@ -47,6 +47,7 @@ const Modal = (
     }
   }
 
+  // error on change only, can accidentally set value of month to "month" etc.
   const handleChange = (event: React.ChangeEvent<ModalFormControl>) => {
     setFormData({
       ...formData,
