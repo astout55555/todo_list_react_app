@@ -19,16 +19,12 @@
 
 0. unrelated, but I noticed a recommendation online to run `npm install --save-dev @tsconfig/vite-react` and also put `"extends": "@tsconfig/vite-react/tsconfig.json"` in my tsconfig.json file...might change how the typing is getting linted...
 
-1. [bug] fix the Mark as Complete handler so that it also checks off the todo...will need to somehow check off that specific todo element...`checked` state is the same name for each todo, so there are multiple `setChecked` functions, with each one referencing/affecting a different `checked` state...
+1. when submitting modal form, use conditional flow based on value of currentTodo to decide whether to update or add a todo (part of solution to implement build plan points 2 and 3 below)
 
--cannot simply pass down a function from App to both Todo and Modal, since I need to reference a specific Todo element to check off, using its personal `setChecked` function. will need to do something with `useImperativeHandle` to expose those particular functions, but not sure how to associate it with the right todo (they would have the same name? how do I reference the correct one from Modal?)
+2. implement the ability to edit/update a todo by saving after editing modal form
 
-2. when submitting modal form, use conditional flow based on value of currentTodo to decide whether to update or add a todo (part of solution to implement build plan points 3 and 4 below)
+3. implement the ability to add a todo using the modal by clicking the `+ Add new to do` link above the table and saving the form after filling it out appropriately
 
-3. implement the ability to edit/update a todo by saving after editing modal form
+4. add modal form validation so adding/editing respects the form data field specifications expected by the server (and prevents submission with a relevant warning if data requirements not met)
 
-4. implement the ability to add a todo using the modal by clicking the `+ Add new to do` link above the table and saving the form after filling it out appropriately
-
-5. add modal form validation so adding/editing respects the form data field specifications expected by the server (and prevents submission with a relevant warning if data requirements not met)
-
-6. implement ability to change todo data back to default (empty) values (for every field including "description", but not directly including "due date"--however, "due date" should change back to default "No Due Date" if month/year do not both keep non-default values)
+5. implement ability to change todo data back to default (empty) values (for every field including "description", but not directly including "due date"--however, "due date" should change back to default "No Due Date" if month/year do not both keep non-default values)

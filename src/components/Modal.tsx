@@ -41,7 +41,6 @@ const Modal = (
       if (!currentTodo.completed) {
         try {
           await toggleComplete(currentTodo);
-          // check off the todo somehow
         } catch (error: unknown) {
           console.error(error);
         }
