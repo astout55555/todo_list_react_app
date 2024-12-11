@@ -33,15 +33,20 @@ const Modal = (
     setFormData({title: '', day: '', month: '', year: '', description: ''});
   }
 
-  const handleCompleteClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleCompleteClick = async (event: React.MouseEvent<HTMLButtonElement>): Promise<void> => {
     event.preventDefault();
     if (currentTodo === null) {
       alert('Cannot mark as complete as item has not been created yet!');
     } else {
       if (!currentTodo.completed) {
-        toggleComplete(currentTodo)
-          .catch((error: unknown) => {console.error(error)});
+        try {
+          await toggleComplete(currentTodo);
+          // check off the todo somehow
+        } catch (error: unknown) {
+          console.error(error);
+        }
       }
+      handleClickOut();
     }
   }
 

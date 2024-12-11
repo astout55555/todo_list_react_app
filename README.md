@@ -19,7 +19,9 @@
 
 0. unrelated, but I noticed a recommendation online to run `npm install --save-dev @tsconfig/vite-react` and also put `"extends": "@tsconfig/vite-react/tsconfig.json"` in my tsconfig.json file...might change how the typing is getting linted...
 
-1. implement ability to mark/update a todo as complete using modal "mark complete" button
+1. [bug] fix the Mark as Complete handler so that it also checks off the todo...will need to somehow check off that specific todo element...`checked` state is the same name for each todo, so there are multiple `setChecked` functions, with each one referencing/affecting a different `checked` state...
+
+-cannot simply pass down a function from App to both Todo and Modal, since I need to reference a specific Todo element to check off, using its personal `setChecked` function. will need to do something with `useImperativeHandle` to expose those particular functions, but not sure how to associate it with the right todo (they would have the same name? how do I reference the correct one from Modal?)
 
 2. when submitting modal form, use conditional flow based on value of currentTodo to decide whether to update or add a todo (part of solution to implement build plan points 3 and 4 below)
 

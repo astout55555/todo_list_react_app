@@ -7,14 +7,6 @@ import {
 const Todo = ({todo, toggleComplete, removeTodo, setCurrentTodo}: TodoProps) => {
   const [checked, setChecked] = useState(todo.completed);
 
-  const handleCheck = () => {
-    toggleComplete(todo)
-      .then(updatedTodo => {
-        setChecked(updatedTodo.completed);
-      })
-      .catch((error: unknown) => {console.error(error)});
-  }
-
   const dueDate = (todo: TodoType) => {
     if (todo.month !== '' && todo.year !== '') {
       return `${todo.month}/${todo.year.slice(2)}`;
@@ -27,11 +19,6 @@ const Todo = ({todo, toggleComplete, removeTodo, setCurrentTodo}: TodoProps) => 
     return `item_${todo.id.toString()}`;
   }
 
-  const handleSelect = (event: React.MouseEvent<HTMLTableCellElement>) => {
-    event.preventDefault();
-    setCurrentTodo(todo);
-  }
-
   const handleDelete = (event: React.MouseEvent<HTMLTableCellElement>) => {
     event.stopPropagation();
     removeTodo(todo.id)
@@ -39,10 +26,16 @@ const Todo = ({todo, toggleComplete, removeTodo, setCurrentTodo}: TodoProps) => 
   }
 
   const handleItemClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
+    event.preventDefault();
+
     if (event.target instanceof HTMLLabelElement) {
-      handleSelect(event);
+      setCurrentTodo(todo);
     } else {
-      handleCheck();
+      toggleComplete(todo)
+        .then(updatedTodo => {
+          setChecked(updatedTodo.completed);
+        })
+        .catch((error: unknown) => {console.error(error)});
     }
   }
 
