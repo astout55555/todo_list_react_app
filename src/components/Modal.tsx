@@ -3,10 +3,11 @@ import {
   ModalFormControl,
   ModalProps,
   NewTodo,
+  TodoType,
 } from "../types";
 
 const Modal = (
-  {currentTodo, setCurrentTodo, modalVisible, setModalVisible, toggleComplete, createTodo}: ModalProps
+  {currentTodo, setCurrentTodo, sendUpdates, modalVisible, setModalVisible, toggleComplete, createTodo}: ModalProps
 ) => {
   const [formData, setFormData] = useState<NewTodo>({title: ''});
 
@@ -59,6 +60,21 @@ const Modal = (
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // implement form submission here, add or update depending on currentTodo
+    if (currentTodo) {
+      // update current Todo
+      console.log(`Current todo: `, currentTodo);
+      console.log('Form data: ', formData);
+      const updateData: TodoType = {
+        id: Number(currentTodo.id),
+        completed: currentTodo.completed,
+        ...formData,
+      };
+      sendUpdates(updateData)
+        .then(() => {handleClickOut()})
+        .catch((error: unknown) => {console.error(error)});
+    } else {
+      // add new todo
+    }
   }
 
   return (

@@ -30,8 +30,14 @@ function App() {
   // }
 
   const toggleComplete = async (todo: TodoType) => {
+    const updateData = {...todo, completed: !todo.completed}
+    const updatedTodo = await sendUpdates(updateData)
+    return updatedTodo;
+  }
+
+  const sendUpdates = async (updateData: TodoType) => {
     try {
-      const updatedTodo = await todosService.updateTodo({...todo, completed: !todo.completed});
+      const updatedTodo = await todosService.updateTodo(updateData);
       const nonUpdatedTodos = allTodos.filter(todo => todo.id !== updatedTodo.id);
       setAllTodos([...nonUpdatedTodos, updatedTodo]);
       return updatedTodo;
@@ -86,7 +92,8 @@ function App() {
           </table>
           <Modal currentTodo={currentTodo} setCurrentTodo={setCurrentTodo}
             modalVisible={modalVisible} setModalVisible={setModalVisible}
-            createTodo={createTodo} toggleComplete={toggleComplete} />
+            createTodo={createTodo} toggleComplete={toggleComplete}
+            sendUpdates={sendUpdates} />
         </main>
       </div>
   )

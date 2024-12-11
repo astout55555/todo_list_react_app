@@ -2,10 +2,10 @@ export interface TodoType {
   id: number,
   title: string,
   completed: boolean,
-  day: string,
-  month: string
-  year: string,
-  description: string
+  day?: string,
+  month?: string
+  year?: string,
+  description?: string
 }
 
 export interface NewTodo {
@@ -20,6 +20,7 @@ export type CurrentTodo = TodoType | null;
 
 type SetCurrentTodoType = React.Dispatch<React.SetStateAction<CurrentTodo>>;
 type ToggleCompleteType = (todo: TodoType) => Promise<TodoType>;
+type SendUpdatesType = (updateData: TodoType) => Promise<TodoType>;
 
 export interface TodoListProps {
   allTodos: TodoType[],
@@ -42,6 +43,7 @@ export interface ModalProps {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
   createTodo: (newTodoData: NewTodo) => Promise<void>,
   toggleComplete: ToggleCompleteType,
+  sendUpdates: SendUpdatesType,
 }
 
 export type ModalFormControl = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
