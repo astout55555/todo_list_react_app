@@ -47,10 +47,19 @@ const Modal = (
     }
   }
 
-  // error on change only, can accidentally set value of month to "month" etc.
+  // const validateFormData = (inputData: NewTodo) => {
+  //   const data = {...inputData};
+
+  //   // validate the title somehow (minimum of 3 characters...)
+  //   // validate description / allow reset to blank value somehow...
+
+  //   return data;
+  // }
+
   const handleChange = (event: React.ChangeEvent<ModalFormControl>) => {
+    // const validatedData = validateFormData(formData);
     setFormData({
-      ...formData,
+      ...formData, // ...validatedData,
       [event.target.name]: event.target.value,
     });
   }
@@ -91,7 +100,7 @@ const Modal = (
                 <label htmlFor="due">Due Date</label>
                 <div className="date">
                   <select id="day" name="day" onChange={handleChange} value={formData.day}>
-                    <option>Day</option>
+                    <option value='  '>Day</option>
                     <option value="01">1</option>
                     <option value="02">2</option>
                     <option value="03">3</option>
@@ -125,7 +134,7 @@ const Modal = (
                     <option value="31">31</option>
                   </select>  /
                   <select id="month" name="month" onChange={handleChange} value={formData.month}>
-                    <option>Month</option>
+                    <option value='  '>Month</option>
                     <option value="01">January</option>
                     <option value="02">February</option>
                     <option value="03">March</option>
@@ -140,19 +149,19 @@ const Modal = (
                     <option value="12">December</option>
                   </select> /
                   <select id="year" name="year" onChange={handleChange} value={formData.year}>
-                    <option>Year</option>
-                    <option>2014</option>
-                    <option>2015</option>
-                    <option>2016</option>
-                    <option>2017</option>
-                    <option>2018</option>
-                    <option>2019</option>
-                    <option>2020</option>
-                    <option>2021</option>
-                    <option>2022</option>
-                    <option>2023</option>
-                    <option>2024</option>
-                    <option>2025</option>
+                    <option value='    '>Year</option>
+                    <option value="2014">2014</option>
+                    <option value="2015">2015</option>
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
                   </select>
                 </div>
               </li>
