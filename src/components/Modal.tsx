@@ -13,8 +13,10 @@ const Modal = (
   useEffect(() => {
     if (currentTodo) {
       setModalVisible(true);
-      // and setFormData to the values of the selected todo
-    } // else, setFormData to empty strings / defaults
+      /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+      const {id, ...updatableProps} = currentTodo;
+      setFormData({...updatableProps});
+    }
   }, [currentTodo, setModalVisible]);
 
   const modalStyle = () => {
