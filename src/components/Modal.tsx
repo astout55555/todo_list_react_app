@@ -16,9 +16,15 @@ const Modal = (
       setModalVisible(true);
       /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
       const {id, completed, ...updatableFormProps} = currentTodo;
+      if (updatableFormProps.description === BLANK_DESCRIPTION_CODE) {
+        updatableFormProps.description = convertDescription(updatableFormProps.description);
+      }
       setFormData({...updatableFormProps});
     }
   }, [currentTodo, setModalVisible]);
+
+  const BLANK_DESCRIPTION_CODE =
+    '                   '; // 19 blank spaces, unlikely to be user input
 
   const modalStyle = () => {
     if (modalVisible) {
@@ -47,11 +53,16 @@ const Modal = (
     }
   }
 
-  // const updateToBlankDescription = (inputData: NewTodo) => {
-
-    // allow reset to blank value somehow...
-
-  // }
+  // allows server update of description which is displayed as reset once converted
+  const convertDescription = (input: string | undefined) => {
+    if (input === BLANK_DESCRIPTION_CODE) {
+      return '';
+    } else if (input === '') {
+      return BLANK_DESCRIPTION_CODE
+    } else {
+      return input;
+    }
+  }
 
   const handleChange = (event: React.ChangeEvent<ModalFormControl>) => {
     setFormData({
@@ -74,6 +85,11 @@ const Modal = (
         completed: currentTodo.completed,
         ...formData,
       };
+
+      if (updateData.description === '') {
+        updateData.description = convertDescription(updateData.description);
+      }
+
       sendUpdates(updateData)
         .then(() => {handleClickOut()})
         .catch((error: unknown) => {console.error(error)});
