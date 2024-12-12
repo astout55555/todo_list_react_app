@@ -21,18 +21,21 @@ export type CurrentTodo = TodoType | null;
 type SetCurrentTodoType = React.Dispatch<React.SetStateAction<CurrentTodo>>;
 type ToggleCompleteType = (todo: TodoType) => Promise<TodoType>;
 type SendUpdatesType = (updateData: TodoType) => Promise<TodoType>;
+type RemoveTodoType = (id: number) => Promise<void>;
+type CreateTodoType = (newTodoData: NewTodo) => Promise<void>;
+type SetModalVisibleType = React.Dispatch<React.SetStateAction<boolean>>;
 
 export interface TodoListProps {
   allTodos: TodoType[],
   toggleComplete: ToggleCompleteType,
-  removeTodo: (id: number) => Promise<void>,
+  removeTodo: RemoveTodoType,
   setCurrentTodo: SetCurrentTodoType,
 }
 
 export interface TodoProps {
   todo: TodoType,
   toggleComplete: ToggleCompleteType,
-  removeTodo: (id: number) => Promise<void>,
+  removeTodo: RemoveTodoType,
   setCurrentTodo: SetCurrentTodoType,
 }
 
@@ -40,8 +43,8 @@ export interface ModalProps {
   currentTodo: CurrentTodo,
   setCurrentTodo: SetCurrentTodoType,
   modalVisible: boolean,
-  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
-  createTodo: (newTodoData: NewTodo) => Promise<void>,
+  setModalVisible: SetModalVisibleType,
+  createTodo: CreateTodoType,
   toggleComplete: ToggleCompleteType,
   sendUpdates: SendUpdatesType,
 }
