@@ -14,12 +14,12 @@ const Modal = (
   useEffect(() => {
     if (currentTodo) {
       setModalVisible(true);
-      /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-      const {id, completed, ...updatableFormProps} = currentTodo;
-      if (updatableFormProps.description === BLANK_DESCRIPTION_CODE) {
-        updatableFormProps.description = convertDescription(updatableFormProps.description);
+      let {description} = currentTodo;
+      if (description === BLANK_DESCRIPTION_CODE) {
+        description = convertDescription(description);
       }
-      setFormData({...updatableFormProps});
+      const {title, day, month, year} = currentTodo;
+      setFormData({title, day, month, year, description});
     }
   }, [currentTodo, setModalVisible]);
 
