@@ -25,10 +25,6 @@ function App() {
     return null;
   }
 
-  // const findByID = (todoID: number) => {
-  //   return allTodos.find(todo => todo.id === todoID);
-  // }
-
   const toggleComplete = async (todo: TodoType) => {
     const updateData = {...todo, completed: !todo.completed}
     const updatedTodo = await sendUpdates(updateData)
