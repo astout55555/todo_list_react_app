@@ -34,7 +34,7 @@ const Modal = (
     }
   }
 
-  const handleClickOut = () => {
+  const closeModal = () => {
     setModalVisible(false);
     setCurrentTodo(null);
     setFormData({title: '', day: '', month: '', year: '', description: ''});
@@ -49,7 +49,7 @@ const Modal = (
         toggleComplete(currentTodo)
           .catch((error: unknown) => {console.error(error)});
       }
-      handleClickOut();
+      closeModal();
     }
   }
 
@@ -91,19 +91,19 @@ const Modal = (
       }
 
       sendUpdates(updateData)
-        .then(() => {handleClickOut()})
+        .then(() => {closeModal()})
         .catch((error: unknown) => {console.error(error)});
     } else {
       // add new todo
       createTodo(formData)
-        .then(() => {handleClickOut()})
+        .then(() => {closeModal()})
         .catch((error: unknown) => {console.error(error)});
     }
   }
 
   return (
     <div style={modalStyle()} >
-      <div className="modal" id="modal_layer" onClick={handleClickOut} ></div>
+      <div className="modal" id="modal_layer" onClick={closeModal} ></div>
       <div className="modal" id="form_modal">
         <form action="" method="post" className="modalForm" onSubmit={handleSubmit}>
           <fieldset>
