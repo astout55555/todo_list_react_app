@@ -1,12 +1,18 @@
-export interface TodoType {
-  id: number,
-  title: string,
-  completed: boolean,
-  day?: string,
-  month?: string
-  year?: string,
-  description?: string
-}
+import z from 'zod';
+
+export const todoSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  completed: z.boolean(),
+  day: z.string().optional(),
+  month: z.string().optional(),
+  year: z.string().optional(),
+  description: z.string().optional(),
+});
+
+export type TodoType = z.infer<typeof todoSchema>;
+
+export const todoArraySchema = z.array(todoSchema);
 
 export interface NewTodo {
   title: string,
